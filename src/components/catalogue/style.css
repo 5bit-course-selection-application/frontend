@@ -1,0 +1,20 @@
+.catalogue {
+  display: block;
+  justify-content: center;
+}
+
+.catalogue .gallery {
+  display: grid;
+  grid-template-columns: 250px 250px 250px;
+  column-gap: 25px;
+  margin: 50px;
+}
+
+.catalogue .filters {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+  align-items: center;
+  height: 70px;
+  border-bottom: 1px solid #3c3c3c;
+}
