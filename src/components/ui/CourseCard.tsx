@@ -17,7 +17,7 @@ interface ICardProps {
   id: number;
   title: string;
   info: string;
-  spec: string;
+  spec?: string;
   rating: number;
 }
 
@@ -65,11 +65,15 @@ const CourseCard = ({id, title, info, spec, rating} : ICardProps) => {
             <Chip key={index} />
           })}
         </Typography> */}
-        <div>
-          {spec.split(/[ ,]+/).map((tag, index) => {
-            return <Chip key={index} label={tag.split("'").join("")} variant='outlined' sx={{ mr: '5px', mt: '5px',color: "#8b8b8b" }}/>
-          })}
-        </div>
+        {
+          spec 
+          &&
+          <div>
+            {spec?.split(/[ ,]+/).map((tag, index) => {
+              return <Chip key={index} label={tag.split("'").join("")} variant='outlined' sx={{ mr: '5px', mt: '5px',color: "#8b8b8b" }}/>
+            })}
+          </div>
+        }
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'flex-start', bgcolor: '#1e1e1e', columnGap: '10px' }}>
         <Rating

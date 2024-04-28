@@ -58,6 +58,8 @@ const Sidebar = ({highlight, name, surname} : ISidebarProps) => {
 
   const handleLogout = () => {
    context.setUser(null);
+   localStorage.setItem('login', '')
+   localStorage.setItem('pass', '')
    navigate('/auth')
   }
 

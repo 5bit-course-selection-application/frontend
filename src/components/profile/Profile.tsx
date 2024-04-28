@@ -53,6 +53,9 @@ const Profile = () => {
   }
 
   const handleToStringQueryArray = (array: Array<string> | undefined) => {
+    if(!context.user?.stack) {
+      return '[""]'
+    }
     let str = ""
     if(array)
     {
@@ -84,7 +87,7 @@ const Profile = () => {
       let stack_str = `, "stack": ` + `${handleToStringQueryArray(stack)}` + "}";
       body += stack_str
 
-      fetch(`http://62.113.104.103:9000/api/users/${context.user?.id}`, {
+      fetch(`http://62.113.104.103:9000/api/users/${localStorage.getItem('login')}`, {
         method: 'PUT',
         mode: 'cors',
         headers: {

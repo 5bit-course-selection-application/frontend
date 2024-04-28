@@ -6,10 +6,10 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TextField from '@mui/material/TextField';
 
 import { useNavigate } from 'react-router-dom'
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { SkillContext } from '../context/SkillContext';
-import { SkillContextType } from '../../@types/types';
+import { ICourse, SkillContextType } from '../../@types/types';
 
 import './style.css'
 
@@ -25,18 +25,39 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
+interface IRec {
+  course_name: string;
+  course_description: string;
+  course_id: number;
+  course_rating: number;
+}
+
 const Analysis = () =>
 {
 
   const navigate = useNavigate()
 
   const context = useContext<SkillContextType>(SkillContext);
+  
+  const [recs, setRecs] = useState<IRec[]>([])
+  const [top, setTop] = useState<number>(5);
+  const [url, setUrl] = useState<string>("");
 
   useEffect(() => {
     if(context.user === null) {
       navigate('/auth')
     }
   }, [])
+
+  const handlePredict = () => {
+    fetch(`http://62.113.104.103:9000/api/predict/recommendation?top=${top}&url=${url}`)
+    .then(
+      res => res.json()
+    )
+    .then(
+      data => setRecs(data.recommendations)
+    )
+  }
 
   return(
     <div className='container'>
@@ -53,9 +74,9 @@ const Analysis = () =>
           </div> */}
           <div className='inputinfo'>
             {/* <a>Бокс с вакансией</a> */}
-            <TextField id="outlined-basic" label="Хочу зарплату..." variant="outlined" multiline rows={6}/>
+            <TextField id="outlined-basic" label="Ссылка на вакансию" variant="outlined" multiline rows={6} value={url} onChange={(e) => setUrl(e.target.value)}/>
             <div style={{ display: 'flex', columnGap: '15px' }}>
-              <Button
+              {/* <Button
                 component="label"
                 role={undefined}
                 variant="contained"
@@ -65,9 +86,21 @@ const Analysis = () =>
               >
                 Загрузить файл
                 <VisuallyHiddenInput type="file" />
-              </Button>
+              </Button> */}
+              <TextField
+                id="outlined-number"
+                label="Количество"
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                defaultValue={5}
+                value={top}
+                onChange={(e) => setTop(Number(e.target.value))}
+              />
               <Button
                 sx={{ bgcolor: 'Highlight', textTransform: 'none', color: "#fff" }}
+                onClick={() => handlePredict()}
               >  
                 Подобрать
               </Button>
@@ -79,6 +112,11 @@ const Analysis = () =>
           <a style={{ color: "#999999" }}>Вот что мы нашли для вас</a>
         </div>
         <div className='gallery'>
+          {
+            recs.map((course, index) => {
+              return <CourseCard key={index} title={course.course_name} info={course.course_description}  id={course.course_id} rating={course.course_rating}/>
+            })
+          }
           {/* <CourseCard title="Фуллстак за 5 дней" info="Вау!" spec="Fullstack"/>
           <CourseCard title="React всего за {dayCount} дней" info="Реакт и реакт и рекат..." spec="React Frontend Web"/>
           <CourseCard title="Только для умных" info="Based and red pilled" spec="C C++ D Rust"/>
