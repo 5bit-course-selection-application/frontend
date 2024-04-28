@@ -85,6 +85,9 @@ const Auth = () => {
         <Button sx={{ bgcolor: 'green', textTransform: 'none', color: "#fff", mt: 2 }} size='large' onClick={() => handleAuth()}>
           Войти
         </Button>
+        <Button variant='outlined' sx={{ textTransform: 'none', color: "green", mt: 2 }} size='large' onClick={() => navigate('/reg')}>
+          Регистрация
+        </Button>
       </div>
     </div>
   )
