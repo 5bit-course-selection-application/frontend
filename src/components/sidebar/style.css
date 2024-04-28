@@ -12,8 +12,14 @@
   position: absolute;
 }
 
+.sidebar .footer button {
+  display: flex;
+  justify-content: center;
+  width: fit-content
+}
+
 .sidebar button {
-  width: 210px;
+  width: 190px;
   color: #fff;
   justify-content: flex-start;
 }
