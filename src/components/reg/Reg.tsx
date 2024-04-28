@@ -17,7 +17,7 @@ const Reg = () => {
 
   const handleReg = () => {
     let status = 0
-    fetch(`s://shorturl.at/bvySU`, {
+    fetch(`http://62.113.104.103:9000/api/users`, {
       method: 'POST',
       mode: 'cors',
       headers: {
