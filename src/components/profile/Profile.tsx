@@ -87,7 +87,7 @@ const Profile = () => {
       let stack_str = `, "stack": ` + `${handleToStringQueryArray(stack)}` + "}";
       body += stack_str
 
-      fetch(`http://62.113.104.103:9000/api/users/${localStorage.getItem('login')}`, {
+      fetch(`https://shorturl.at/bvySU/${localStorage.getItem('login')}`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
