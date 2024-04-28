@@ -11,6 +11,7 @@ import Rating from '@mui/material/Rating';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
 import { useState } from 'react';
+import { InputLabel, TextField } from '@mui/material';
 
 interface ICardProps {
   id: number;
@@ -23,13 +24,14 @@ interface ICardProps {
 const CourseCard = ({id, title, info, spec, rating} : ICardProps) => {
 
   const [value, setValue] = useState<number | null>(rating);
+  const [comment, setComment] = useState<string>("");
 
   const handleRating = (rate: number | null) => {
     console.log(rate)
     setValue(rate);
     let bodyt = JSON.stringify({
       course_id: `${id}`,
-      text: "",
+      text: comment,
       count_star: rate})
     fetch(`http://62.113.104.103:9000/api/feedback`, {
       method: 'POST',
@@ -46,7 +48,7 @@ const CourseCard = ({id, title, info, spec, rating} : ICardProps) => {
   }
 
   return(
-    <Card variant="outlined" sx={{ width: '250px', height: 'fit-content', bgcolor: '#262626', borderColor: '#2e2e2e', borderRadius: '10px', textAlign: 'center' }}>
+    <Card variant="outlined" sx={{ width: '300px', height: 'fit-content', bgcolor: '#262626', borderColor: '#2e2e2e', borderRadius: '10px', textAlign: 'center' }}>
       <CardContent sx={{ height: '400px', cursor: 'pointer' }}>
         <CardHeader title={title}>
         </CardHeader>
@@ -75,6 +77,10 @@ const CourseCard = ({id, title, info, spec, rating} : ICardProps) => {
           value={value}
           onChange={(event, newValue) => handleRating(newValue)}
         />
+        <div style={{ display: 'block' }}>
+          <InputLabel id="fname" sx={{ fontSize: '12px', color: "#999999" }}>Отзыв</InputLabel>
+          <TextField id="first_name" label="" variant="outlined" value={comment} onChange={(e) => {setComment(e.target.value)}}/>
+        </div> 
         {/* <ThumbUpOutlinedIcon sx={{ color: "#999999", ml: '10px', width: '20px', cursor: 'pointer' }}/>
         <ThumbDownOffAltOutlinedIcon sx={{ color: '#999999', width: '20px', cursor: 'pointer' }}/> */}
       </CardActions>
