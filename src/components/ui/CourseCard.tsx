@@ -33,7 +33,7 @@ const CourseCard = ({id, title, info, spec, rating} : ICardProps) => {
       course_id: `${id}`,
       text: comment,
       count_star: rate})
-    fetch(`https://tinyurl.com/2bz8crss`, {
+    fetch(`http://62.113.104.103:9000/api/feedback`, {
       method: 'POST',
       mode: 'cors',
       headers: {

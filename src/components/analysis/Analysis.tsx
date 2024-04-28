@@ -50,7 +50,7 @@ const Analysis = () =>
   }, [])
 
   const handlePredict = () => {
-    fetch(`https://shorturl.at/dmFO8?top=${top}&url=${url}`)
+    fetch(`http://62.113.104.103:9000/api/predict/recommendation?top=${top}&url=${url}`)
     .then(
       res => res.json()
     )

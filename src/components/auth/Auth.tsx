@@ -18,7 +18,7 @@ const Auth = () => {
   const handleAuth = () => {
     try {
 
-        fetch('https://shorturl.at/wzFK0', {
+        fetch('http://62.113.104.103:9000/api/users/login', {
           mode: 'cors',
           method: 'POST',
           headers: {
@@ -44,7 +44,7 @@ const Auth = () => {
         )
     }
     finally {
-      fetch(`https://shorturl.at/bvySU/${login}`)
+      fetch(`http://62.113.104.103:9000/api/users/${login}`)
       .then(
         resj => resj.json()
       )
@@ -82,7 +82,7 @@ const Auth = () => {
         setPass(localPass)
       } 
       finally {
-        fetch(`https://shorturl.at/bvySU/${localStorage.getItem('login')}`)
+        fetch(`http://62.113.104.103:9000/api/users/${localStorage.getItem('login')}`)
         .then(
           resj => resj.json()
         )

@@ -25,7 +25,7 @@ const Catalogue = () =>
       navigate('/auth')
     }
     else {
-      fetch('https://shorturl.at/jGTZ7')
+      fetch('http://62.113.104.103:9000/api/courses')
       .then(
         res => res.json()
       )

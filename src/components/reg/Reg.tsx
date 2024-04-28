@@ -17,7 +17,7 @@ const Reg = () => {
 
   const handleReg = () => {
     let status = 0
-    fetch(`https://shorturl.at/bvySU`, {
+    fetch(`s://shorturl.at/bvySU`, {
       method: 'POST',
       mode: 'cors',
       headers: {

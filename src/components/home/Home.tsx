@@ -20,7 +20,7 @@ const Home = () => {
     }
     else {
       // user pic
-      fetch(`https://shorturl.at/ftxyX/${context.user?.id}`, {
+      fetch(`http://62.113.104.103:9000/api/files/avatars/${context.user?.id}`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
